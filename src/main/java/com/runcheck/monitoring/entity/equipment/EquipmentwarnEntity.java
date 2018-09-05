@@ -7,7 +7,9 @@ import java.util.Objects;
 @Table(name = "equipmentwarn", schema = "runcheck", catalog = "")
 public class EquipmentwarnEntity {
     private int id;
-    private Integer checkFe;
+    private Integer setting;
+    private Double slope;
+  /*  private Integer checkFe;
     private Integer checkCu;
     private Integer checkAl;
     private Integer checkCr;
@@ -19,9 +21,11 @@ public class EquipmentwarnEntity {
     private Integer checkZn;
     private Integer checkMg;
     private Integer checkCa;
-    private Integer checklittleFe;
+    private Integer checklittleFe;*/
+  @ManyToOne()
+  @JoinColumn(name = "eqid")
     private Integer eqId;
-    private Double slopeFe;
+   /* private Double slopeFe;
     private Double slopeCu;
     private Double slopeAl;
     private Double slopeCr;
@@ -33,7 +37,7 @@ public class EquipmentwarnEntity {
     private Double slopeZn;
     private Double slopeMg;
     private Double slopeCa;
-    private Double littleFeslope;
+    private Double littleFeslope;*/
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -45,7 +49,7 @@ public class EquipmentwarnEntity {
         this.id = id;
     }
 
-    @Basic
+   /* @Basic
     @Column(name = "checkFe")
     public Integer getCheckFe() {
         return checkFe;
@@ -164,9 +168,7 @@ public class EquipmentwarnEntity {
     public void setCheckCa(Integer checkCa) {
         this.checkCa = checkCa;
     }
-
-    @Basic
-    @Column(name = "eqId")
+*/
     public Integer getEqId() {
         return eqId;
     }
@@ -175,7 +177,7 @@ public class EquipmentwarnEntity {
         this.eqId = eqId;
     }
 
-    @Override
+   /* @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -326,5 +328,23 @@ public class EquipmentwarnEntity {
 
     public void setLittleFeslope(Double littleFeslope) {
         this.littleFeslope = littleFeslope;
+    }*/
+   @Basic
+   @Column(name = "setting")
+    public Integer getSetting() {
+        return setting;
+    }
+
+    public void setSetting(Integer setting) {
+        this.setting = setting;
+    }
+    @Basic
+    @Column(name = "slope")
+    public Double getSlope() {
+        return slope;
+    }
+
+    public void setSlope(Double slope) {
+        this.slope = slope;
     }
 }

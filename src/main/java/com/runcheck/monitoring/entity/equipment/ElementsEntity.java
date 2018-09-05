@@ -2,13 +2,16 @@ package com.runcheck.monitoring.entity.equipment;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "elements", schema = "runcheck", catalog = "")
 public class ElementsEntity {
     private int id;
-    private Integer fe;
+    private Integer elements;
+
+   /* private Integer fe;
     private Integer cu;
     private Integer al;
     private Integer cr;
@@ -20,13 +23,17 @@ public class ElementsEntity {
     private Integer zn;
     private Integer mg;
     private Integer ca;
-    private Integer magnetic;
-    private Timestamp collecttime;
-    private Timestamp checktime;
-    private String oiltype;
-    private String eqname;
+    private Integer magnetic;*/
+    private Date collecttime;
+    private Date checktime;
+    @ManyToOne()
+    @JoinColumn(name = "sqid")
+    private Integer sqid;
+//    private String eqname;
+@ManyToOne()
+@JoinColumn(name = "eqid")
     private Integer eqid;
-    private String suggest;
+//    private String suggest;
 
     @Id
     @GeneratedValue
@@ -39,7 +46,7 @@ public class ElementsEntity {
         this.id = id;
     }
 
-    @Basic
+  /*  @Basic
     @Column(name = "fe")
     public Integer getFe() {
         return fe;
@@ -167,29 +174,29 @@ public class ElementsEntity {
 
     public void setMagnetic(Integer magnetic) {
         this.magnetic = magnetic;
-    }
+    }*/
 
     @Basic
     @Column(name = "collecttime")
-    public Timestamp getCollecttime() {
+    public Date getCollecttime() {
         return collecttime;
     }
 
-    public void setCollecttime(Timestamp collecttime) {
+    public void setCollecttime(Date collecttime) {
         this.collecttime = collecttime;
     }
 
     @Basic
     @Column(name = "checktime")
-    public Timestamp getChecktime() {
+    public Date getChecktime() {
         return checktime;
     }
 
-    public void setChecktime(Timestamp checktime) {
+    public void setChecktime(Date checktime) {
         this.checktime = checktime;
     }
 
-    @Basic
+   /* @Basic
     @Column(name = "oiltype")
     public String getOiltype() {
         return oiltype;
@@ -208,9 +215,8 @@ public class ElementsEntity {
     public void setEqname(String eqname) {
         this.eqname = eqname;
     }
+*/
 
-    @Basic
-    @Column(name = "eqid")
     public Integer getEqid() {
         return eqid;
     }
@@ -219,7 +225,7 @@ public class ElementsEntity {
         this.eqid = eqid;
     }
 
-    @Basic
+  /*  @Basic
     @Column(name = "suggest")
     public String getSuggest() {
         return suggest;
@@ -227,9 +233,9 @@ public class ElementsEntity {
 
     public void setSuggest(String suggest) {
         this.suggest = suggest;
-    }
+    }*/
 
-    @Override
+/*    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -260,5 +266,23 @@ public class ElementsEntity {
     public int hashCode() {
 
         return Objects.hash(id, fe, cu, al, cr, cd, ag, ti, sn, pb, zn, mg, ca, magnetic, collecttime, checktime, oiltype, eqname, eqid, suggest);
+    }*/
+@Basic
+@Column(name = "elements")
+    public Integer getElements() {
+        return elements;
+    }
+
+    public void setElements(Integer elements) {
+        this.elements = elements;
+    }
+
+
+    public Integer getSqid() {
+        return sqid;
+    }
+
+    public void setSqid(Integer sqid) {
+        this.sqid = sqid;
     }
 }
