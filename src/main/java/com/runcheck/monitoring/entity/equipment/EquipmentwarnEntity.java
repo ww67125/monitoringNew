@@ -22,8 +22,8 @@ public class EquipmentwarnEntity {
     private Integer checkMg;
     private Integer checkCa;
     private Integer checklittleFe;*/
-  @ManyToOne()
-  @JoinColumn(name = "eqid")
+/*  @ManyToOne()
+  @JoinColumn(name = "eqid")*/
     private Integer eqId;
    /* private Double slopeFe;
     private Double slopeCu;

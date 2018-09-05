@@ -2,6 +2,7 @@ package com.runcheck.monitoring.entity.equipment;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +17,12 @@ public class EquiptmentEntity {
     private String oiltype;
 //    private Double slope;
     private String companyName;
-
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "eqId")
+    private List<EquipmentwarnEntity> eqwarns;
+    @OneToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "eqId")
+    private List<ElementsEntity> elements;
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -125,5 +131,21 @@ public class EquiptmentEntity {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public List<EquipmentwarnEntity> getEqwarns() {
+        return eqwarns;
+    }
+
+    public void setEqwarns(List<EquipmentwarnEntity> eqwarns) {
+        this.eqwarns = eqwarns;
+    }
+
+    public List<ElementsEntity> getElements() {
+        return elements;
+    }
+
+    public void setElements(List<ElementsEntity> elements) {
+        this.elements = elements;
     }
 }

@@ -26,14 +26,17 @@ public class ElementsEntity {
     private Integer magnetic;*/
     private Date collecttime;
     private Date checktime;
-    @ManyToOne()
-    @JoinColumn(name = "sqid")
+    /*@ManyToOne()
+    @JoinColumn(name = "sqid")*/
     private Integer sqid;
 //    private String eqname;
-@ManyToOne()
-@JoinColumn(name = "eqid")
+/*@ManyToOne()
+@JoinColumn(name = "eqid")*/
     private Integer eqid;
-//    private String suggest;
+    private String suggest;
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true )
+    @JoinColumn(name = "sqid")
+    private EquipmentwarnEntity equipentWarn;
 
     @Id
     @GeneratedValue
@@ -225,7 +228,7 @@ public class ElementsEntity {
         this.eqid = eqid;
     }
 
-  /*  @Basic
+    @Basic
     @Column(name = "suggest")
     public String getSuggest() {
         return suggest;
@@ -233,7 +236,7 @@ public class ElementsEntity {
 
     public void setSuggest(String suggest) {
         this.suggest = suggest;
-    }*/
+    }
 
 /*    @Override
     public boolean equals(Object o) {
