@@ -14,8 +14,9 @@ public class EquiptmentEntity {
     private Timestamp lastdate;
     private Integer runtime;
     private String oiltype;
-    private Double slope;
+//    private Double slope;
     private String companyName;
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -87,7 +88,7 @@ public class EquiptmentEntity {
         this.oiltype = oiltype;
     }
 
-    @Basic
+  /*  @Basic
     @Column(name = "slope")
     public Double getSlope() {
         return slope;
@@ -95,7 +96,7 @@ public class EquiptmentEntity {
 
     public void setSlope(Double slope) {
         this.slope = slope;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {
@@ -108,14 +109,13 @@ public class EquiptmentEntity {
                 Objects.equals(begindate, that.begindate) &&
                 Objects.equals(lastdate, that.lastdate) &&
                 Objects.equals(runtime, that.runtime) &&
-                Objects.equals(oiltype, that.oiltype) &&
-                Objects.equals(slope, that.slope);
+                Objects.equals(oiltype, that.oiltype);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, equipmentName, equipmentNo, begindate, lastdate, runtime, oiltype, slope);
+        return Objects.hash(id, equipmentName, equipmentNo, begindate, lastdate, runtime, oiltype);
     }
     @Basic
     @Column(name = "companyName")
