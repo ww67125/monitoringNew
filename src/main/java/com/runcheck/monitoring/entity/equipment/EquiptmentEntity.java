@@ -1,36 +1,41 @@
 package com.runcheck.monitoring.entity.equipment;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "equiptment", schema = "runcheck", catalog = "")
 public class EquiptmentEntity {
-    private int id;
+    private Integer id;
     private String equipmentName;
     private String equipmentNo;
-    private Timestamp begindate;
-    private Timestamp lastdate;
-    private Integer runtime;
+    private Date begindate;
+    private Date lastdate;
+    private String runtime;
     private String oiltype;
 //    private Double slope;
     private String companyName;
-    @OneToMany(fetch=FetchType.EAGER)
+
+
+    /*    @OneToMany(fetch=FetchType.EAGER)
+        @JoinColumn(name = "eqId")
+        private List<EquipmentwarnEntity> eqwarns;*/
+/*    @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name = "eqId")
-    private List<EquipmentwarnEntity> eqwarns;
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinColumn(name = "eqId")
-    private List<ElementsEntity> elements;
+    private List<ElementsEntity> elements;*/
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -53,34 +58,32 @@ public class EquiptmentEntity {
     public void setEquipmentNo(String equipmentNo) {
         this.equipmentNo = equipmentNo;
     }
-
-    @Basic
-    @Column(name = "begindate")
-    public Timestamp getBegindate() {
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    public Date getBegindate() {
         return begindate;
     }
 
-    public void setBegindate(Timestamp begindate) {
+    public void setBegindate(Date begindate) {
         this.begindate = begindate;
     }
-
-    @Basic
-    @Column(name = "lastdate")
-    public Timestamp getLastdate() {
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    public Date getLastdate() {
         return lastdate;
     }
 
-    public void setLastdate(Timestamp lastdate) {
+    public void setLastdate(Date lastdate) {
         this.lastdate = lastdate;
     }
 
     @Basic
     @Column(name = "runtime")
-    public Integer getRuntime() {
+    public String getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(Integer runtime) {
+    public void setRuntime(String runtime) {
         this.runtime = runtime;
     }
 
@@ -133,19 +136,20 @@ public class EquiptmentEntity {
         this.companyName = companyName;
     }
 
-    public List<EquipmentwarnEntity> getEqwarns() {
+    /*public List<EquipmentwarnEntity> getEqwarns() {
         return eqwarns;
     }
 
     public void setEqwarns(List<EquipmentwarnEntity> eqwarns) {
         this.eqwarns = eqwarns;
-    }
-
+    }*/
+/*
     public List<ElementsEntity> getElements() {
         return elements;
     }
 
     public void setElements(List<ElementsEntity> elements) {
         this.elements = elements;
-    }
+    }*/
+
 }

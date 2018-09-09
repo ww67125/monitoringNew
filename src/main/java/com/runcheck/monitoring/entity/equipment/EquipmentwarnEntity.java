@@ -6,9 +6,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "equipmentwarn", schema = "runcheck", catalog = "")
 public class EquipmentwarnEntity {
-    private int id;
+    private Integer id;
+    private String type;
     private Integer setting;
     private Double slope;
+    private String suggest;
   /*  private Integer checkFe;
     private Integer checkCu;
     private Integer checkAl;
@@ -41,11 +43,11 @@ public class EquipmentwarnEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -169,6 +171,8 @@ public class EquipmentwarnEntity {
         this.checkCa = checkCa;
     }
 */
+   @Basic
+   @Column(name = "eqId")
     public Integer getEqId() {
         return eqId;
     }
@@ -329,8 +333,7 @@ public class EquipmentwarnEntity {
     public void setLittleFeslope(Double littleFeslope) {
         this.littleFeslope = littleFeslope;
     }*/
-   @Basic
-   @Column(name = "setting")
+
     public Integer getSetting() {
         return setting;
     }
@@ -338,13 +341,28 @@ public class EquipmentwarnEntity {
     public void setSetting(Integer setting) {
         this.setting = setting;
     }
-    @Basic
-    @Column(name = "slope")
+
     public Double getSlope() {
         return slope;
     }
 
     public void setSlope(Double slope) {
         this.slope = slope;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSuggest() {
+        return suggest;
+    }
+
+    public void setSuggest(String suggest) {
+        this.suggest = suggest;
     }
 }

@@ -1,5 +1,7 @@
 package com.runcheck.monitoring.entity.equipment;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -8,9 +10,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "elements", schema = "runcheck", catalog = "")
 public class ElementsEntity {
-    private int id;
+    private Integer id;
     private Integer elements;
-
+    private String type;
    /* private Integer fe;
     private Integer cu;
     private Integer al;
@@ -24,30 +26,31 @@ public class ElementsEntity {
     private Integer mg;
     private Integer ca;
     private Integer magnetic;*/
+
     private Date collecttime;
     private Date checktime;
     /*@ManyToOne()
     @JoinColumn(name = "sqid")*/
-    private Integer sqid;
+//    private Integer sqid;
 //    private String eqname;
 /*@ManyToOne()
 @JoinColumn(name = "eqid")*/
     private Integer eqid;
     private String suggest;
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true )
-    @JoinColumn(name = "sqid")
     private EquipmentwarnEntity equipentWarn;
-
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
+
+
+
 
   /*  @Basic
     @Column(name = "fe")
@@ -181,6 +184,8 @@ public class ElementsEntity {
 
     @Basic
     @Column(name = "collecttime")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     public Date getCollecttime() {
         return collecttime;
     }
@@ -191,6 +196,8 @@ public class ElementsEntity {
 
     @Basic
     @Column(name = "checktime")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     public Date getChecktime() {
         return checktime;
     }
@@ -281,11 +288,28 @@ public class ElementsEntity {
     }
 
 
-    public Integer getSqid() {
+  /*  public Integer getSqid() {
         return sqid;
     }
 
     public void setSqid(Integer sqid) {
         this.sqid = sqid;
+    }*/
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,optional=true )
+    @JoinColumn(name = "sqid")
+    public EquipmentwarnEntity getEquipentWarn() {
+        return equipentWarn;
+    }
+
+    public void setEquipentWarn(EquipmentwarnEntity equipentWarn) {
+        this.equipentWarn = equipentWarn;
     }
 }
