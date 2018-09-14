@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -49,9 +52,33 @@ public class SaveController {
         return "index1";
     }
     @RequestMapping("saveEle")
-    public String saveEle(@Valid ElementsEntity entity,Integer sqid, BindingResult result,Model model){
-        entity.setEquipentWarn(equipWarnService.getByid(sqid));
-        elementService.saveObject(entity);
+    public String saveEle(@Valid ElementsEntity entity, String sqid,String elements, BindingResult result, Model model){
+        if (entity.getChecktime()==null){
+            entity.setChecktime(new Date());
+        }
+        if (entity.getCollecttime()==null){
+            entity.setCollecttime(new Date());
+        }
+        int i=0;
+        for (String el:elements.split(",")){
+            if(!el.equals("")){
+                ElementsEntity elementsEntity=new ElementsEntity();
+                elementsEntity.setEqid(entity.getEqid());
+                elementsEntity.setChecktime(entity.getChecktime());
+                elementsEntity.setCollecttime(entity.getChecktime());
+                if (!sqid.split(",")[i].equals("")){
+                    elementsEntity.setEquipentWarn( equipWarnService.getByid(Integer.parseInt(sqid.split(",")[i])));
+
+                }
+                 elementsEntity.setType(entity.getType().split(",")[i]);
+                elementsEntity.setElements(Integer.parseInt(el));
+//                ellist.add(elementsEntity);
+                elementService.saveObject(elementsEntity);
+            }
+            i++;
+        }
+//        entity.setEquipentWarn(equipWarnService.getByid(Integer.parseInt(sqid)));
+//        elementService.saveObjects(ellist);
         List<EquiptmentEntity> list=equipService.getAll();
         model.addAttribute("equiplist",list);
         return "index1";

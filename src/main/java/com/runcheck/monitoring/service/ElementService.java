@@ -32,4 +32,7 @@ public class ElementService {
     public void saveObject(ElementsEntity entity){
         eleJPA.save(entity);
     }
+    public void saveObjects(List<ElementsEntity> list){
+        eleJPA.saveAll(list);
+    }
 }

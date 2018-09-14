@@ -36,7 +36,8 @@
 
                         <div class="center-block" id="main${s.index}" style="width: 1000px;height:600px;margin: 0 auto"></div>
                    <br>
-                        <div><textarea readonly cols="80" rows="5" style="overflow: scroll"> <c:forEach var="m2" items="${m.value}" varStatus="c"><c:if test="${m2.value.elements>m2.value.equipentWarn.setting||m2.value.elements>(m2.value.elements+m2.value.equipentWarn.slope)}">${m2.key}:${m.key}超标，建议:${m2.value.equipentWarn.suggest}</c:if>
+                        <c:set var="v1" value="${m.value.get(0).elements}"></c:set>
+                        <div><textarea readonly cols="80" rows="5" style="overflow: scroll"> <c:forEach var="m2" items="${m.value}" varStatus="c"><c:if test="${m2.value.elements>m2.value.equipentWarn.setting||(v1<(m2.value.elements+m2.value.equipentWarn.slope))}">${m2.key}:${m.key}超标，建议:${m2.value.equipentWarn.suggest}</c:if><c:set var="v1" value="${m2.value.elements}"></c:set>
                         </c:forEach></textarea></div>
                         <br>
                     </c:forEach>
@@ -58,6 +59,7 @@
     var myChart = echarts.init(document.getElementById('main'+"${c.index}"));
     var data1=[<c:forEach items="${m.value}" var="m2"> "${m2.key}",</c:forEach>];
     var data2=[<c:forEach items="${m.value}" var="m2">"${m2.value.elements}",</c:forEach>];
+
     var data3=[<c:forEach items="${m.value}" var="m2">
             <c:if test="${m2.value.elements>m2.value.equipentWarn.setting}">
             'red'
@@ -133,6 +135,9 @@
             {
                 name:'元素',
                 type:'line',
+                showSymbol: true,
+                symbol: 'circle',     //设定为实心点
+                symbolSize: 20,   //设定实心点的大小
                 // color:"#555555",
                 itemStyle : {  /*设置折线颜色*/
                     normal : {

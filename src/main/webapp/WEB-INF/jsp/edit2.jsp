@@ -30,12 +30,27 @@
 
     <div class="panel-body">
     <form action="/saveEle" method="post" class="form-inline">
+        <div class="form-group"><label>采样日期:</label><input class="form-control" type="date" name="collecttime" value="${ele.collecttime}"></div>
+        <div class="form-group"><label>检测日期:</label><input class="form-control" type="date" name="checktime" value="${ele.checktime}"></div>
         <input class="form-control" type="hidden" name="id" value="${ele.id}">
         <input class="form-control" type="hidden" name="eqid" value="${eqid}">
-        <div class="form-group"><label>检测值:</label><input class="form-control" type="text" name="elements" value="${ele.elements}"></div>
-    <div class="form-group"><label>采样日期:</label><input class="form-control" type="date" name="collecttime" value="${ele.collecttime}"></div>
-    <div class="form-group"><label>检测日期:</label><input class="form-control" type="date" name="checktime" value="${ele.checktime}"></div>
-
+        <%
+            String[] array={"Ag","Al","B","Ba","Ca","Cr","Cu","Fe","Mg",
+                    "Mn","Mo","Na","Ni","P","Pb","Si","Sn","Ti","V","Zn","FeSmall"};
+        %>
+        <c:forEach var="type" items="<%=array%>">
+            <div class="form-group"><label>类型:${type}</label> <input class="form-control" type="hidden" name="type" value="${type}"></div>
+            <div class="form-group"><label>检测值:</label><input class="form-control" type="text" name="elements" value="${ele.elements}"></div>
+              <div class="form-group">
+                <label>对应设定:</label>
+                <select name="sqid" class="form-control">
+                    <option value="">请选择</option>
+                    <c:forEach var="ew" items="${eWlist}" varStatus="s">
+                        <option value="${ew.id}">${ew.type}:${ew.setting},${ew.slope},${ew.suggest}</option>
+                    </c:forEach>
+                </select>
+            </div>
+      <%--
         <div class="form-group">
             <label>类型:</label>
             <select name="type"  class="form-control">
@@ -63,16 +78,11 @@
                 <option value="FeSmall">铁屑</option>
             </select>
         </div>
-        <div class="form-group">
-            <label>对应设定:</label>
-            <select name="sqid" class="form-control">
-                <c:forEach var="ew" items="${eWlist}" varStatus="s">
-                <option value="${ew.id}">${ew.type}:${ew.setting},${ew.slope},${ew.suggest}</option>
-                </c:forEach>
-            </select>
-        </div>
+       --%>
+        </c:forEach>
         <input class="form-control btn btn-default btn-success" type="submit" value="保存">
     </form>
+
 </div>
 </div>
 </body>
